@@ -34,7 +34,8 @@ class LearningResourceController extends Controller
             $query->where('type', $request->string('type')->toString());
         }
 
-        $resources = $query->latest()->paginate(10)->withQueryString();
+        $resources = $query->latest()->paginate(10);
+        $resources->appends($request->query());
         $categories = Category::orderBy('name')->get();
 
         return view('learning-resources.index', [

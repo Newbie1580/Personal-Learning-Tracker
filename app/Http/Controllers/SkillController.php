@@ -25,7 +25,7 @@ class SkillController extends Controller
             $query->where('proficiency_level', $request->string('proficiency_level')->toString());
         }
 
-        $skills = $query->latest()->paginate(10)->withQueryString();
+        $skills = $query->latest()->paginate(10)->appends($request->query());
 
         return view('skills.index', [
             'skills' => $skills,
